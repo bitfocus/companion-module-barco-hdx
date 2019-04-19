@@ -105,6 +105,7 @@ instance.prototype.actions = function (system) {
 						label: 'Load layout',
 						options: [{
 								type: 'textinput',
+								id: 'parameter',
 								label: 'parameter'
 						}]
 				},
@@ -164,7 +165,7 @@ instance.prototype.action = function (action) {
 						break;
 
 				case 'loadLayout':
-						cmd = getCommandValue(Buffer.from([0x20, 0x90]), opt.parameter);
+						cmd = getCommandValue(Buffer.from([0x20, 0x90]), opt.parameter).toString('hex');
 						break;
 
 				case 'shutter':
