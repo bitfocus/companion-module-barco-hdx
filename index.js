@@ -157,24 +157,24 @@ instance.prototype.action = function (action) {
 
 		switch (id) {
 				case 'lamp':
-						if (opt.lamp === 'lamp_on') {
-								cmd = '\xfe\x00\x00\x03\x02\x76\x1a\x01\x96\xff';
-						} else if (opt.lamp === 'lamp_off') {
-								cmd = '\xfe\x00\x00\x03\x02\x76\x1a\x00\x95\xff';
-						}
-						break;
+					if (opt.lamp === 'lamp_on') {
+							cmd = '\xfe\x00\x00\x03\x02\x76\x1a\x01\x96\xff';
+					} else if (opt.lamp === 'lamp_off') {
+							cmd = '\xfe\x00\x00\x03\x02\x76\x1a\x00\x95\xff';
+					}
+					break;
 
 				case 'loadLayout':
-						cmd = getCommandValue(Buffer.from([0x20, 0x90]), opt.parameter).toString('hex');
-						break;
+					cmd = getCommandValue(Buffer.from([0x20, 0x90]), opt.parameter).toString('hex');
+					break;
 
 				case 'shutter':
-						if (opt.lamp === 'shutter_open') {
-								cmd = '\xfe\x00\x22\x42\x00\x64\xff';
-						} else if (opt.lamp === 'shutter_close') {
-								cmd = '\xfe\x00\x23\x42\x00\x65\xff';
-						}
-						break;
+					if (opt.lamp === 'shutter_open') {
+							cmd = '\xfe\x00\x22\x42\x00\x64\xff';
+					} else if (opt.lamp === 'shutter_close') {
+							cmd = '\xfe\x00\x23\x42\x00\x65\xff';
+					}
+					break;
 		}
 
 		if (cmd !== undefined) {
