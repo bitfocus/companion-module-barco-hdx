@@ -147,20 +147,20 @@ instance.prototype.action = function (action) {
 
 				// Build the value to be sent.
 				return Buffer.concat([
-						Buffer.from([0xFE, 0x0, 0x0, 0x03, 0x02]),
-						command,
-						pBuffer,
-						Buffer.from([0x0]),
-						Buffer.from([checksum]),
-						Buffer.from([0xFF])]);
+					Buffer.from([0xFE, 0x0, 0x0, 0x03, 0x02]),
+					command,
+					pBuffer,
+					Buffer.from([0x0]),
+					Buffer.from([checksum]),
+					Buffer.from([0xFF])]);
 		};
 
 		switch (id) {
 				case 'lamp':
 					if (opt.lamp === 'lamp_on') {
-							cmd = '\xfe\x00\x00\x03\x02\x76\x1a\x01\x96\xff';
+						cmd = new Buffer([0xfe,0x00,0x00,0x03,0x02,0x76,0x1a,0x01,0x96,0xff]);
 					} else if (opt.lamp === 'lamp_off') {
-							cmd = '\xfe\x00\x00\x03\x02\x76\x1a\x00\x95\xff';
+						cmd = new Buffer([0xfe,0x00,0x00,0x03,0x02,0x76,0x1a,0x00,0x96,0xff]);
 					}
 					break;
 
@@ -170,9 +170,9 @@ instance.prototype.action = function (action) {
 
 				case 'shutter':
 					if (opt.lamp === 'shutter_open') {
-							cmd = '\xfe\x00\x22\x42\x00\x64\xff';
+							cmd = new Buffer([0xfe0,0x00,0x22,0x42,0x00,0x64,0xff]);
 					} else if (opt.lamp === 'shutter_close') {
-							cmd = '\xfe\x00\x23\x42\x00\x65\xff';
+							cmd = new Buffer([0xfe0,0x00,0x23,0x42,0x00,0x64,0xff]);
 					}
 					break;
 		}
