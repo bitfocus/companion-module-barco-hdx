@@ -90,7 +90,7 @@ instance.prototype.destroy = function () {
 instance.prototype.actions = function (system) {
 		var self = this;
 
-		var actions = {/*
+		var actions = {
 				'lamp': {
 						label: 'Lamp control',
 						options: [{
@@ -100,7 +100,7 @@ instance.prototype.actions = function (system) {
 								default: 'lamp_on',
 								choices: [{ label: 'lamp on', id: 'lamp_on' }, { label: 'lamp off', id: 'lamp_off' }]
 						}]
-				},
+				}/*,
 				'loadLayout': {
 						label: 'Load layout',
 						options: [{
@@ -190,9 +190,9 @@ instance.prototype.action = function (action) {
 
 				case 'shutter':
 					if (opt.shutter === 'shutter_open') {
-							cmd = Buffer.from([0xfe0,0x00,0x22,0x42,0x00,0x64,0xff]);
+							cmd = Buffer.from([0xfe,0x00,0x22,0x42,0x00,0x64,0xff]);
 					} else if (opt.shutter === 'shutter_close') {
-							cmd = Buffer.from([0xfe0,0x00,0x23,0x42,0x00,0x64,0xff]);
+							cmd = Buffer.from([0xfe,0x00,0x23,0x42,0x00,0x65,0xff]);
 					}
 					break;
 
@@ -200,7 +200,7 @@ instance.prototype.action = function (action) {
 					if (opt.shutter === 'shutter_open') {
 							cmd = Buffer.from([0xfe,0x00,0x22,0x42,0x00,0x64,0xff]).toString('hex');
 					} else if (opt.shutter === 'shutter_close') {
-							cmd = Buffer.from([0xfe,0x00,0x23,0x42,0x00,0x64,0xff]).toString('hex');
+							cmd = Buffer.from([0xfe,0x00,0x23,0x42,0x00,0x65,0xff]).toString('hex');
 					}
 					break;
 
@@ -208,7 +208,7 @@ instance.prototype.action = function (action) {
 					if (opt.shutter === 'shutter_open') {
 							cmd = '\xfe\x00\x22\x42\x00\x64\xff';
 					} else if (opt.shutter === 'shutter_close') {
-							cmd = '\xfe\x00\x23\x42\x00\x64\xff';
+							cmd = '\xfe\x00\x23\x42\x00\x65\xff';
 					}
 					break;
 		}
