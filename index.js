@@ -100,7 +100,7 @@ instance.prototype.actions = function (system) {
 								default: 'lamp_on',
 								choices: [{ label: 'lamp on', id: 'lamp_on' }, { label: 'lamp off', id: 'lamp_off' }]
 						}]
-				}/*,
+				},/*
 				'loadLayout': {
 						label: 'Load layout',
 						options: [{
