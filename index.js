@@ -110,7 +110,17 @@ instance.prototype.actions = function (system) {
 						}]
 				},
 				'shutter': {
-						label: 'Shutter option 1',
+						label: 'Shutter',
+						options: [{
+								type: 'dropdown',
+								label: 'on/off',
+								id: 'shutter',
+								default: 'shutter_close',
+								choices: [{ label: 'shutter close', id: 'shutter_close' }, { label: 'shutter open', id: 'shutter_open' }]
+						}]
+				},
+				'shutter2': {
+						label: 'Shutter second option',
 						options: [{
 								type: 'dropdown',
 								label: 'on/off',
@@ -156,25 +166,34 @@ instance.prototype.action = function (action) {
 		};
 
 		switch (id) {
-				case 'lamp':
-					if (opt.lamp === 'lamp_on') {
-						cmd = Buffer.from([0xfe,0x00,0x00,0x03,0x02,0x76,0x1a,0x01,0x96,0xff]);
-					} else if (opt.lamp === 'lamp_off') {
-						cmd = Buffer.from([0xfe,0x00,0x00,0x03,0x02,0x76,0x1a,0x00,0x96,0xff]);
-					}
-					break;
 
-				case 'loadLayout':
-					cmd = getCommandValue(Buffer.from([0x20, 0x90]), opt.parameter);
-					break;
+			case 'lamp':
+				if (opt.lamp === 'lamp_on') {
+					cmd = Buffer.from([0xfe,0x00,0x00,0x03,0x02,0x76,0x1a,0x01,0x96,0xff]);
+				} else if (opt.lamp === 'lamp_off') {
+					cmd = Buffer.from([0xfe,0x00,0x00,0x03,0x02,0x76,0x1a,0x00,0x95,0xff]);
+				}
+				break;
 
-				case 'shutter':
-					if (opt.shutter === 'shutter_open') {
-							cmd = Buffer.from([0xfe,0x00,0x22,0x42,0x00,0x64,0xff]);
-					} else if (opt.shutter === 'shutter_close') {
-							cmd = Buffer.from([0xfe,0x00,0x23,0x42,0x00,0x65,0xff]);
-					}
-					break;
+			case 'loadLayout':
+				cmd = getCommandValue(Buffer.from([0x20, 0x90]), opt.parameter);
+				break;
+
+			case 'shutter':
+				if (opt.shutter === 'shutter_open') {
+						cmd = Buffer.from([0xfe,0x00,0x22,0x42,0x00,0x64,0xff]);
+				} else if (opt.shutter === 'shutter_close') {
+						cmd = Buffer.from([0xfe,0x00,0x23,0x42,0x00,0x65,0xff]);
+				}
+				break;
+
+			case 'shutter2':
+				if (opt.shutter === 'shutter_open') {
+					cmd getCommandValue(Buffer.from([0x22,0x42]), 0);
+				} else if (opt.shutter === 'shutter_close') {
+					cmd getCommandValue(Buffer.from([0x23,0x42]), 0);
+				}
+				break;
 
 		}
 
