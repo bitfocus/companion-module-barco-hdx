@@ -100,7 +100,7 @@ instance.prototype.actions = function (system) {
 								default: 'lamp_on',
 								choices: [{ label: 'lamp on', id: 'lamp_on' }, { label: 'lamp off', id: 'lamp_off' }]
 						}]
-				},/*
+				},
 				'loadLayout': {
 						label: 'Load layout',
 						options: [{
@@ -108,29 +108,9 @@ instance.prototype.actions = function (system) {
 								id: 'parameter',
 								label: 'parameter'
 						}]
-				},*/
+				},
 				'shutter': {
 						label: 'Shutter option 1',
-						options: [{
-								type: 'dropdown',
-								label: 'on/off',
-								id: 'shutter',
-								default: 'shutter_close',
-								choices: [{ label: 'shutter close', id: 'shutter_close' }, { label: 'shutter open', id: 'shutter_open' }]
-						}]
-				},
-				'shutter2': {
-						label: 'Shutter option 2',
-						options: [{
-								type: 'dropdown',
-								label: 'on/off',
-								id: 'shutter',
-								default: 'shutter_close',
-								choices: [{ label: 'shutter close', id: 'shutter_close' }, { label: 'shutter open', id: 'shutter_open' }]
-						}]
-				},
-				'shutter3': {
-						label: 'Shutter option 3',
 						options: [{
 								type: 'dropdown',
 								label: 'on/off',
@@ -185,7 +165,7 @@ instance.prototype.action = function (action) {
 					break;
 
 				case 'loadLayout':
-					cmd = getCommandValue(Buffer.from([0x20, 0x90]), opt.parameter).toString('hex');
+					cmd = getCommandValue(Buffer.from([0x20, 0x90]), opt.parameter);
 					break;
 
 				case 'shutter':
@@ -196,21 +176,6 @@ instance.prototype.action = function (action) {
 					}
 					break;
 
-				case 'shutter2':
-					if (opt.shutter === 'shutter_open') {
-							cmd = Buffer.from([0xfe,0x00,0x22,0x42,0x00,0x64,0xff]).toString('hex');
-					} else if (opt.shutter === 'shutter_close') {
-							cmd = Buffer.from([0xfe,0x00,0x23,0x42,0x00,0x65,0xff]).toString('hex');
-					}
-					break;
-
-				case 'shutter3':
-					if (opt.shutter === 'shutter_open') {
-							cmd = '\xfe\x00\x22\x42\x00\x64\xff';
-					} else if (opt.shutter === 'shutter_close') {
-							cmd = '\xfe\x00\x23\x42\x00\x65\xff';
-					}
-					break;
 		}
 
 		if (cmd !== undefined) {
