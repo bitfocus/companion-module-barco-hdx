@@ -1,4 +1,4 @@
-## Barco HDX Module
+## Barco HDX, HDF Module
 
 This module supports;
 

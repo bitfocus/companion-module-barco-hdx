@@ -64,7 +64,7 @@ instance.prototype.config_fields = function () {
 						id: 'info',
 						width: 12,
 						label: 'Information',
-						value: 'This module is for Barco HDX'
+						value: 'This module is for Barco HDX and or HDF'
 				},
 				{
 						type: 'textinput',
@@ -189,9 +189,9 @@ instance.prototype.action = function (action) {
 
 			case 'shutter2':
 				if (opt.shutter === 'shutter_open') {
-					cmd getCommandValue(Buffer.from([0x22,0x42]), 0);
+					cmd = getCommandValue(Buffer.from([0x22,0x42]), '0');
 				} else if (opt.shutter === 'shutter_close') {
-					cmd getCommandValue(Buffer.from([0x23,0x42]), 0);
+					cmd = getCommandValue(Buffer.from([0x23,0x42]), '0');
 				}
 				break;
 
