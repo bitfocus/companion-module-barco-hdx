@@ -106,21 +106,12 @@ instance.prototype.actions = function (system) {
 						options: [{
 								type: 'textinput',
 								id: 'parameter',
-								label: 'parameter'
+								label: 'parameter',
+								regex: self.REGEX_NUMBER
 						}]
 				},
 				'shutter': {
 						label: 'Shutter',
-						options: [{
-								type: 'dropdown',
-								label: 'on/off',
-								id: 'shutter',
-								default: 'shutter_close',
-								choices: [{ label: 'shutter close', id: 'shutter_close' }, { label: 'shutter open', id: 'shutter_open' }]
-						}]
-				},
-				'shutter2': {
-						label: 'Shutter second option',
 						options: [{
 								type: 'dropdown',
 								label: 'on/off',
@@ -141,9 +132,8 @@ instance.prototype.action = function (action) {
 		var cmd;
 
 		getCommandValue = function(command, parameter) {
-				let checksum = 5;
-				let pBuffer  = Buffer.from(parameter);
-
+				let checksum = 0;
+				let pBuffer  = Buffer.from([parseInt(parameter)]);
 				// Calculate the checksum value.
 				command.forEach(function(item) {
 						checksum += item;
@@ -155,12 +145,11 @@ instance.prototype.action = function (action) {
 
 				checksum = checksum % 256;
 
-				// Build the value to be sent.
+				// Build the value to be sent. 0x00,0x03,0x02 is an answer request it's optional
 				return Buffer.concat([
-					Buffer.from([0xFE, 0x0, 0x0, 0x03, 0x02]),
+					Buffer.from([0xFE,0x00]),
 					command,
 					pBuffer,
-					Buffer.from([0x0]),
 					Buffer.from([checksum]),
 					Buffer.from([0xFF])]);
 		};
@@ -176,7 +165,7 @@ instance.prototype.action = function (action) {
 				break;
 
 			case 'loadLayout':
-				cmd = getCommandValue(Buffer.from([0x20, 0x90]), opt.parameter);
+				cmd = getCommandValue(Buffer.from([0x00,0x00,0x03,0x02,0x20, 0x90]), opt.parameter);
 				break;
 
 			case 'shutter':
