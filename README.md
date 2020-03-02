@@ -1,4 +1,5 @@
 # companion-module-barco-hdx
+See HELP.md and LICENSE
 
 [Network Communication Reference](https://github.com/bitfocus/companion/files/3046578/Network.Communication.Reference.Guide.pdf)
 
